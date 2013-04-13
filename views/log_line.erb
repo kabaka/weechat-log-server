@@ -19,6 +19,10 @@
     else
       style = 'chat'
     end
+
+    if even
+      style << ' even'
+    end
 %>
 <tr class='<%= style %>'>
   <td><a name='<%= anchor %>' href='#<%= anchor %>'><%= match[:date] %></a></td>

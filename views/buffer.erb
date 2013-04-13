@@ -20,13 +20,13 @@
   end
 
   if log
+    even = true
 %>
-<p>Log: <%=log%></p>
 <table style="width: 100%;">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Time</th>
+      <th style='width: 90px;'>Date</th>
+      <th style='width: 80px;'>Time</th>
       <th>Prefix</th>
       <th>Text</th>
     </tr>
@@ -35,7 +35,11 @@
     <%
       File.open(log, 'r') do |f|
         f.each_line do |line|
-        %><%= erb :log_line, :locals => {:line => line.fix_encoding!} %><%
+        %><%= erb :log_line,
+          :locals => {
+          :line => line.fix_encoding!,
+          :even => (even = !even)
+        } %><%
         end
       end
     %>
