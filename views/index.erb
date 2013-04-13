@@ -15,7 +15,7 @@
 
   networks = {}
 
-  Dir.new(path).each do |file|
+  Dir.new(path).sort.each do |file|
     my_path = "#{path}/#{file}"
     next unless File.file? my_path
 
