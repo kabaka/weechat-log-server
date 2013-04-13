@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WeeChat Log Server</title>
+    <style type="text/css">
+      html {
+        font-family: sans-serif;
+      }
+      body {
+        width: 870px;
+        border: 1px solid #DEDEDE;
+        margin: 10px auto;
+        padding: 15px;
+      }
+
+      #head {
+        border-bottom: 1px dotted #DFDFDF;
+        height: 50px;
+      }
+      #head p {
+        line-height: 30px;
+        font-size: 20px;
+      }
+      #head #hostname {
+        font-size: 18px;
+        color: #777;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+
+      table {
+        width: 80%;
+        margin: 5px auto;
+      }
+      thead th {
+        border-bottom: 1px solid #000;
+        font-weight: bold;
+      }
+
+      .button {
+        display: inline-block;
+        height: 25px;
+        width: 100px;
+        color: #000;
+        line-height: 25px;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+        border: 2px solid #DDD;
+      }
+      .green {
+        background-color: #55DD55;
+        border-top: 2px solid #3F3;
+        border-left: 2px solid #3F3;
+        border-right: 2px solid #3A3;
+        border-bottom: 2px solid #3A3;
+      }
+      .green:active {
+        border-top: 2px solid #3A3;
+        border-left: 2px solid #3A3;
+        border-right: 2px solid #3F3;
+        border-bottom: 2px solid #3F3;
+      }
+      .orange {
+        background-color: #DDAA55;
+        border-top: 2px solid #FA3;
+        border-left: 2px solid #FA3;
+        border-right: 2px solid #A33;
+        border-bottom: 2px solid #A33;
+      }
+      .orange:active {
+        border-top: 2px solid #A33;
+        border-left: 2px solid #A33;
+        border-right: 2px solid #FA3;
+        border-bottom: 2px solid #FA3;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id='head'>
+      <p>WeeChat Logs - <span id='hostname'><%= Socket.gethostname %></span></p>
+    </div>
+    <%= yield %>
+  </body>
+</html>

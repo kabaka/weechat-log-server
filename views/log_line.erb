@@ -1,0 +1,18 @@
+<%
+  match = line.match(/^(?<date>[0-9-]{10}) (?<time>[0-9:]{8})\t(?<prefix>[^\t]*)\t(?<text>.*)$/)
+  if match
+    anchor = "#{match[:date]}_#{match[:time]}"
+%>
+<tr>
+  <td><a name='<%= anchor %>' href='#<%= anchor %>'><%= match[:date] %></a></td>
+  <td><a name='<%= anchor %>' href='#<%= anchor %>'><%= match[:time] %></a></td>
+  <td><%= match[:prefix] %></td>
+  <td><%= match[:text] %></td>
+</tr>
+<%
+    else
+p line
+    end
+  
+%>
+

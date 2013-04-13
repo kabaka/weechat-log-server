@@ -1,0 +1,51 @@
+<h1>Log Index</h1>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Network</th>
+      <th>Buffers</th>
+      <th>Last Updated</th>
+    </tr>
+  </thead>
+  <tbody>
+<%
+
+  path = File.expand_path $opts[:log_dir]
+
+  networks = {}
+
+  Dir.new(path).each do |file|
+    my_path = "#{path}/#{file}"
+    next unless File.file? my_path
+
+    match = file.match $opts[:file_name_regex]
+
+    next unless match
+
+    networks[match[:network]] ||= {:last_update => 0, :buffers => 0}
+
+    my_update = File.mtime my_path
+
+    if networks[match[:network]][:last_update] == 0
+      networks[match[:network]][:last_update] = my_update
+    elsif networks[match[:network]][:last_update] < my_update
+      networks[match[:network]][:last_update] = my_update
+    end
+
+    networks[match[:network]][:buffers] += 1
+  end
+
+  networks.each do |network, info|
+%>
+<tr>
+  <td><a class='button green' href="/<%= URI.encode network %>/">View</a></td>
+  <td><%= network %></td>
+  <td><%= info[:buffers] %></td>
+  <td><%= info[:last_update] %></td>
+</tr>
+<%
+  end
+%>
+  </tbody>
+</table>
