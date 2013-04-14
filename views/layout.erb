@@ -33,6 +33,8 @@
       table {
         width: 80%;
         margin: 5px auto;
+        word-wrap: break-word;
+        border-collapse: collapse;
       }
       thead th {
         border-bottom: 1px solid #000;
@@ -109,9 +111,21 @@
         text-align: right;
         white-space: nowrap;
       }
+      .chat .prefix {
+        color: #226;
+        font-weight: bold;
+      }
       .prefix, .text {
         padding: 0 8px;
       }
+      .date a, .time a {
+        color: #777;
+        text-decoration: none;
+      }
+      .date a:hover, .time a:hover {
+        color: #BBB;
+      }
+
       .center {
         text-align: center;
       }
