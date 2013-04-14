@@ -33,12 +33,14 @@
       table {
         width: 80%;
         margin: 5px auto;
-        word-wrap: break-word;
         border-collapse: collapse;
       }
       thead th {
         border-bottom: 1px solid #000;
         font-weight: bold;
+      }
+      td.text {
+        word-wrap: break-all;
       }
 
       tr.join {
@@ -110,7 +112,7 @@
 
       .irc {
         font-family: monospace;
-        white-space: pre;
+        white-space: pre-wrap;
       }
       .prefix {
         text-align: right;
