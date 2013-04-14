@@ -8,4 +8,5 @@ Sinatra-powered WeeChat HTTP Log Viewer
 * Add more command line options (port, address, etc.)
 * Add administrative interface to change what is visible to unauthenticated
   viewers.
+* Finish making this a gem.
 * Write README
