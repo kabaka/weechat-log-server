@@ -24,8 +24,15 @@
       style << ' even'
     end
 
-    text = match[:text].gsub /\s/, '&nbsp;'
+    text = HTMLEntities.new.encode match[:text]
 
+    text_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
+
+    if text_match
+      text = "<span class='highlight'>#{text_match[:highlight]}</span>#{text_match[:remainder].hyperlinks}"
+    else
+      text.hyperlinks!
+    end
 %>
 <tr class='<%= style %>'>
   <td class='date center'><a name='<%= anchor %>' href='#<%= anchor %>'><%= match[:date] %></a></td>
