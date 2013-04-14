@@ -23,12 +23,15 @@
     if even
       style << ' even'
     end
+
+    text = match[:text].gsub /\s/, '&nbsp;'
+
 %>
 <tr class='<%= style %>'>
   <td class='center'><a name='<%= anchor %>' href='#<%= anchor %>'><%= match[:date] %></a></td>
   <td class='center'><a name='<%= anchor %>' href='#<%= anchor %>'><%= match[:time] %></a></td>
   <td class='irc prefix'><%= match[:prefix] %></td>
-  <td class='irc text'><%= match[:text] %></td>
+  <td class='irc text'><%= text %></td>
 </tr>
 <%
     else
