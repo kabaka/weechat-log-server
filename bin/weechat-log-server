@@ -16,7 +16,7 @@ OptionParser.new do |opts|
     $opts[:verbose] = true
   end
 
-  $opts[:log_dir] = "~/.weechat/logs/"
+  $opts[:log_dir] = '~/.weechat/logs/'
   opts.on '-d', '--weechat-directory DIR', "WeeChat's log directory (default: #{$opts[:log_dir]})" do |opt|
     $opts[:log_dir] = opt
   end
@@ -26,14 +26,24 @@ OptionParser.new do |opts|
     $opts[:file_name_regex] = opt
   end
 
-  $opts[:templates_dir] = "views"
+  $opts[:templates_dir] = 'views'
   opts.on '-t', '--templates-directory DIR', "Sinatra templates directory (default: #{$opts[:templates_dir]})" do |opt|
     $opts[:templates_dir] = opt
   end
 
-  $opts[:cache_dir] = "cache"
-  opts.on '-c', '--cache-directory DIR', "Directory (default: #{$opts[:cache_dir]})" do |opt|
+  $opts[:cache_dir] = 'cache'
+  opts.on '-c', '--cache-directory DIR', "Cache directory (default: #{$opts[:cache_dir]})" do |opt|
     $opts[:cache_dir] = opt
+  end
+
+  $opts[:port] = 4567
+  opts.on '-p', '--port PORT', "HTTP server port (default: #{$opts[:port]})" do |opt|
+    $opts[:port] = opt
+  end
+
+  $opts[:bind_address] = '0.0.0.0'
+  opts.on '-b', '--bind-address IP', "HTTP server listen IP (default: #{$opts[:bind_address]})" do |opt|
+    $opts[:bind_address] = opt
   end
 
 end.parse!

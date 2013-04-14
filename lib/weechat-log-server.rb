@@ -6,4 +6,4 @@ require 'htmlentities'
 require 'weechat-log-server/webserver'
 require 'weechat-log-server/string'
 
-Thin::Server.start Webserver, '0.0.0.0', 4567
+Thin::Server.start Webserver, $opts[:bind_address], $opts[:port]
