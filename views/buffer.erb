@@ -1,6 +1,6 @@
 <% he = HTMLEntities.new %>
 <h1>Chat Log: <%= he.encode params[:buffer] %> on <%= he.encode params[:network] %></h1>
-<p><a class='button orange' href='../'>Back</a></p>
+<p><a class='button orange' href='/<%= URI.encode params[:network] %>'>Back</a></p>
 <%
 
   path = File.expand_path $opts[:log_dir]
