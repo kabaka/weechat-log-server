@@ -57,9 +57,6 @@
         border-bottom: 1px solid #000;
         font-weight: bold;
       }
-      td.text {
-        word-wrap: break-all;
-      }
 
       tr.join {
         color: #3C3;
@@ -131,13 +128,18 @@
         border-bottom: 2px solid #FA3;
       }
 
+
       .irc {
         font-family: monospace;
         white-space: pre-wrap;
+        font-size: 13px;
+        line-height: 16px;
       }
-      .prefix {
+      td.prefix {
+        vertical-align: top;
         text-align: right;
         white-space: nowrap;
+        padding-top: 3px;
       }
       .chat .prefix {
         color: #226;
@@ -145,6 +147,9 @@
       }
       .prefix, .text {
         padding: 0 8px;
+      }
+      .text {
+        word-wrap: break-all;
       }
       .date a, .time a {
         color: #777;
