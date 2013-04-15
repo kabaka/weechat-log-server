@@ -3,10 +3,6 @@ class Webserver < Sinatra::Base
     set :views, File.expand_path($opts[:templates_dir])
   end
 
-  get '/test/?' do
-    request.inspect
-  end
-
   get '/' do
     erb :index
   end
