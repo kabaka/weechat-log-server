@@ -52,8 +52,8 @@
           unless date == last_date
         %>
         <tr>
-          <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'>View</a></td>
-          <td><%= he.encode date %></td>
+          <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode last_date %>'>View</a></td>
+          <td><%= he.encode last_date %></td>
           <td><%= lines %></td>
         </tr>
         <%
