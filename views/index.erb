@@ -36,9 +36,11 @@
     networks[match[:network]][:buffers] += 1
   end
 
+  even = true
+
   networks.each do |network, info|
 %>
-<tr>
+<tr class='<%= 'even' if even = !even%>'>
   <td><a class='button green' href="/<%= URI.encode network %>/">View</a></td>
   <td><%= network %></td>
   <td><%= info[:buffers] %></td>

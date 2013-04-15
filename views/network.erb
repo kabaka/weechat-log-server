@@ -31,9 +31,11 @@
 
   network = URI.encode params[:network]
 
+  even = true
+
   buffers.each do |buffer, info|
   %>
-  <tr>
+  <tr class='<%= 'even' if even = !even%>'>
     <td><a class='button green' href="/<%= network %>/<%= URI.encode buffer %>/">View</a></td>
     <td><%= buffer %></a></td>
     <td><%= info[:last_updated] %></a></td>

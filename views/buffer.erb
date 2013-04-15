@@ -24,7 +24,7 @@
   if log
     even = true
 %>
-<table style="table-layout: fixed; width: 95%;">
+<table>
   <thead>
     <tr>
       <th></th>
@@ -34,6 +34,7 @@
   </thead>
   <tbody>
     <%
+      even      = true
       date      = nil
       last_date = nil
       lines     = 0
@@ -51,7 +52,7 @@
 
           unless date == last_date
         %>
-        <tr>
+        <tr class='<%= 'even' if even = !even %>'>
           <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode last_date %>'>View</a></td>
           <td><%= he.encode last_date %></td>
           <td><%= lines %></td>
@@ -63,7 +64,7 @@
         end
       end
     %>
-    <tr>
+    <tr class='<%= 'even' if even = !even %>'>
       <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'>View</a></td>
       <td><%= he.encode date %></td>
       <td><%= lines %></td>
