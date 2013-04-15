@@ -77,7 +77,7 @@
                     style << ' even'
                   end
 
-                  text = HTMLEntities.new.encode match[:text]
+                  text = he.new.encode match[:text]
 
                   text_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
 
