@@ -37,13 +37,23 @@ OptionParser.new do |opts|
   end
 
   $opts[:port] = 4567
-  opts.on '-p', '--port PORT', "HTTP server port (default: #{$opts[:port]})" do |opt|
+  opts.on '-P', '--port PORT', "HTTP server port (default: #{$opts[:port]})" do |opt|
     $opts[:port] = opt
   end
 
   $opts[:bind_address] = '0.0.0.0'
   opts.on '-b', '--bind-address IP', "HTTP server listen IP (default: #{$opts[:bind_address]})" do |opt|
     $opts[:bind_address] = opt
+  end
+
+  $opts[:user_name] = 'admin'
+  opts.on '-u', '--user-name', "User name to access logs. (default: #{$opts[:user_name]})" do |opt|
+    $opts[:user_name] = opt
+  end
+
+  $opts[:password] = 'admin'
+  opts.on '-p', '--password', "Password to access logs. (default: #{$opts[:password]})" do |opt|
+    $opts[:password] = opt
   end
 
 end.parse!

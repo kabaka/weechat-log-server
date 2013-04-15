@@ -23,7 +23,11 @@
 
   if log
     even = true
+    
+    key = set_key "/#{params[:network]}/#{params[:buffer]}/#{params[:date]}"
+    share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}?key=#{key}"
   %>
+  <p>Share: <a href='<%= share_url %>'><%= share_url %></a></p>
   <table style="table-layout: fixed; width: 95%;">
     <thead>
       <tr>
@@ -84,7 +88,7 @@
                   end
                 %>
                 <tr class='<%= style %>'>
-                  <td class='time center'><a name='<%= anchor %>' href='#<%= anchor %>'><%= match[:time] %></a></td>
+                  <td class='time center'><a name='<%= anchor %>' href='<%= share_url %>#<%= anchor %>'><%= match[:time] %></a></td>
                   <td class='irc prefix'><%= match[:prefix] %></td>
                   <td class='irc text'><%= text %></td>
                 </tr>
