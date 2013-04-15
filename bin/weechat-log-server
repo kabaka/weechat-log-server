@@ -47,12 +47,12 @@ OptionParser.new do |opts|
   end
 
   $opts[:user_name] = 'admin'
-  opts.on '-u', '--user-name', "User name to access logs. (default: #{$opts[:user_name]})" do |opt|
+  opts.on '-u', '--user-name USER', "User name to access logs. (default: #{$opts[:user_name]})" do |opt|
     $opts[:user_name] = opt
   end
 
   $opts[:password] = 'admin'
-  opts.on '-p', '--password', "Password to access logs. (default: #{$opts[:password]})" do |opt|
+  opts.on '-p', '--password PASSWORD', "Password to access logs. (default: #{$opts[:password]})" do |opt|
     $opts[:password] = opt
   end
 
