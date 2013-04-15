@@ -34,6 +34,7 @@
   </thead>
   <tbody>
     <%
+      date      = nil
       last_date = nil
       lines     = 0
       network   = URI.encode params[:network]
@@ -55,13 +56,19 @@
           <td><%= he.encode date %></td>
           <td><%= lines %></td>
         </tr>
-
         <%
           lines = 0
           last_date = date
           end
         end
       end
+    %>
+    <tr>
+      <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'>View</a></td>
+      <td><%= he.encode date %></td>
+      <td><%= lines %></td>
+    </tr>
+    <%
     %>
   </tbody>
 </table>
