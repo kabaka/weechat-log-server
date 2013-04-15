@@ -14,4 +14,8 @@ class Webserver < Sinatra::Base
   get '/:network/:buffer/?' do
     erb :buffer
   end
+
+  get '/:network/:buffer/:date/?' do
+    erb :buffer_date
+  end
 end

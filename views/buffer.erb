@@ -27,21 +27,39 @@
 <table style="table-layout: fixed; width: 95%;">
   <thead>
     <tr>
-      <th style='width: 100px;'>Date</th>
-      <th style='width: 100px;'>Time</th>
-      <th style='width: 100px;'>Prefix</th>
-      <th>Text</th>
+      <th></th>
+      <th>Date</th>
+      <th>Lines</th>
     </tr>
   </thead>
   <tbody>
     <%
+      last_date = nil
+      lines     = 0
+      network   = URI.encode params[:network]
+      buffer    = URI.encode params[:buffer]
+
       File.open(log, 'r') do |f|
         f.each_line do |line|
-        %><%= erb :log_line,
-          :locals => {
-          :line => line.fix_encoding!,
-          :even => (even = !even)
-        } %><%
+          line.fix_encoding!
+
+          date = line.split.first
+          last_date = date if last_date.nil?
+
+          lines += 1
+
+          unless date == last_date
+        %>
+        <tr>
+          <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'>View</a></td>
+          <td><%= he.encode date %></td>
+          <td><%= lines %></td>
+        </tr>
+
+        <%
+          lines = 0
+          last_date = date
+          end
         end
       end
     %>

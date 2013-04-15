@@ -1,0 +1,105 @@
+<% he = HTMLEntities.new %>
+<h1>Chat Log: <%= he.encode params[:buffer] %> on <%= he.encode params[:network] %> (<%= he.encode params[:date]%>)</h1>
+<p><a class='button orange' href='../'>Back</a></p>
+<%
+
+  path = File.expand_path $opts[:log_dir]
+
+  log = nil
+
+  Dir.new(path).each do |file|
+    my_path = "#{path}/#{file}"
+    next unless File.file? my_path
+
+    match = file.match $opts[:file_name_regex]
+
+    next unless match and match[:network] == params[:network]
+    next unless match[:buffer] == params[:buffer]
+
+    log = my_path
+
+    break
+  end
+
+  if log
+    even = true
+  %>
+  <table style="table-layout: fixed; width: 95%;">
+    <thead>
+      <tr>
+        <th style='width: 100px;'>Time</th>
+        <th style='width: 100px;'>Prefix</th>
+        <th>Text</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+        started = false
+
+        File.open(log, 'r') do |f|
+          catch :done do
+            f.each_line do |line|
+              catch :skip do
+
+                line.fix_encoding!
+
+                match = line.match(/^(?<date>[0-9-]{10}) (?<time>[0-9:]{8})\t(?<prefix>[^\t]*)\t(?<text>.*)$/)
+                if match
+                  if match[:date].to_s != params[:date]
+                    throw :done if started
+                    throw :skip
+                  end
+
+                  anchor = "#{match[:date]}_#{match[:time]}"
+
+                  case match[:prefix]
+                  when '-->'
+                    style = 'join'
+                  when '<--'
+                    style = 'leave'
+                  when '--'
+                    style = 'misc'
+                  when '=!='
+                    style = 'error'
+                  when ' *'
+                    style = 'action'
+                  when ''
+                    style = 'no-prefix'
+                  else
+                    style = 'chat'
+                  end
+
+                  if even = !even
+                    style << ' even'
+                  end
+
+                  text = HTMLEntities.new.encode match[:text]
+
+                  text_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
+
+                  if text_match
+                    text = "<span class='highlight'>#{text_match[:highlight]}</span>#{text_match[:remainder].hyperlinks}"
+                  else
+                    text.hyperlinks!
+                  end
+                %>
+                <tr class='<%= style %>'>
+                  <td class='time center'><a name='<%= anchor %>' href='#<%= anchor %>'><%= match[:time] %></a></td>
+                  <td class='irc prefix'><%= match[:prefix] %></td>
+                  <td class='irc text'><%= text %></td>
+                </tr>
+                <%
+                end
+              end
+            end
+          end
+        end
+      %>
+    </tbody>
+  </table>
+  <%
+    else
+    %>Not Found<%
+    end
+
+  %>
