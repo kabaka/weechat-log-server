@@ -54,6 +54,8 @@
                     throw :skip
                   end
 
+                  started = true unless started
+
                   anchor = "#{match[:date]}_#{match[:time]}"
 
                   case match[:prefix]
