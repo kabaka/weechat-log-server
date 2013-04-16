@@ -4,6 +4,7 @@ class Webserver < Sinatra::Base
   end
 
   get '/' do
+    auth_required!
     erb :index
   end
 
