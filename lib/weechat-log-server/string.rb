@@ -1,6 +1,6 @@
 class String
   def fix_encoding!
-    encode! 'ASCII-8BIT',
+    encode! $opts[:encoding],
       :invalid => :replace,
       :undef   => :replace
   end

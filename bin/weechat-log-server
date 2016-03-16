@@ -26,6 +26,11 @@ OptionParser.new do |opts|
     $opts[:file_name_regex] = opt
   end
 
+  $opts[:encoding] = 'UTF-8'
+  opts.on '-e', '--encoding ENCODING', "Encoding of the logs. (default: #{$opts[:encoding]}, old: ASCII-8BIT)" do |opt|
+    $opts[:encoding] = opt
+  end
+
   $opts[:templates_dir] = 'views'
   opts.on '-t', '--templates-directory DIR', "Sinatra templates directory (default: #{$opts[:templates_dir]})" do |opt|
     $opts[:templates_dir] = opt
