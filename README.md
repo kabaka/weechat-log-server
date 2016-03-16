@@ -21,6 +21,7 @@ bin/weechat-log-server`. All args are optional, but setting -p is recommended.
     -c, --cache-directory DIR        Cache directory (default: cache)
     -P, --port PORT                  HTTP server port (default: 4567)
     -b, --bind-address IP            HTTP server listen IP (default: 0.0.0.0)
+    -N, --no-auth                    Don't use HTTP authentication.
     -u, --user-name USER             User name to access logs. (default: admin)
     -p, --password PASSWORD          Password to access logs. (default: admin)
 

@@ -51,6 +51,11 @@ OptionParser.new do |opts|
     $opts[:bind_address] = opt
   end
 
+  $opts[:no_auth] = false
+  opts.on '-N', '--no-auth', "Don't use HTTP authentication." do |opt|
+    $opts[:no_auth] = true
+  end
+
   $opts[:user_name] = 'admin'
   opts.on '-u', '--user-name USER', "User name to access logs. (default: #{$opts[:user_name]})" do |opt|
     $opts[:user_name] = opt
