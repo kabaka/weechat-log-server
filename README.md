@@ -16,10 +16,12 @@ bin/weechat-log-server`. All args are optional, but setting -p is recommended.
     -v, --verbose                    Output a lot of information.
     -d, --weechat-directory DIR      WeeChat's log directory (default: ~/.weechat/logs/)
     -r, --regex REGEX                Regular expression to match file names. (default: (?-mix:irc\.(?<network>[^\.]+)\.(?<buffer>[^\.]+)\.weechatlog))
+    -e, --encoding ENCODING          Encoding of the logs. (default: UTF-8, old: ASCII-8BIT)
     -t, --templates-directory DIR    Sinatra templates directory (default: views)
     -c, --cache-directory DIR        Cache directory (default: cache)
     -P, --port PORT                  HTTP server port (default: 4567)
     -b, --bind-address IP            HTTP server listen IP (default: 0.0.0.0)
+    -N, --no-auth                    Don't use HTTP authentication.
     -u, --user-name USER             User name to access logs. (default: admin)
     -p, --password PASSWORD          Password to access logs. (default: admin)
 

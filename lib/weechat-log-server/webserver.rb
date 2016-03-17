@@ -29,7 +29,7 @@ class Webserver < Sinatra::Base
   helpers do
 
     def auth_required!
-      unless authorized?
+      unless $opts[:no_auth] || authorized?
         response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
         throw :halt, [401, "Not authorized\n"]
       end
