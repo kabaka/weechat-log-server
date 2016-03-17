@@ -24,8 +24,7 @@
   if log
     even = true
     
-    key = set_key "/#{params[:network]}/#{params[:buffer]}/#{params[:date]}"
-    share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}?key=#{key}"
+    share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}"
   %>
   <p>Share: <a href='<%= share_url %>'><%= share_url %></a></p>
   <table style="table-layout: fixed; width: 95%;">
@@ -81,10 +80,13 @@
 
                   text = he.encode match[:text]
 
-                  text_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
+                  highlight_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
+                  jn_lv_match     = text.match(/^(?<pre>.*?)(?<host>[(][~]?\w+[@][\w-:.]+[)][ ])(?<post>.*)$/)
 
-                  if text_match
-                    text = "<span class='highlight'>#{text_match[:highlight]}</span>#{text_match[:remainder].hyperlinks}"
+                  if highlight_match
+                    text = "<span class='highlight'>#{highlight_match[:highlight]}</span>#{highlight_match[:remainder].hyperlinks}"
+                  elsif ['-->', '<--'].include?(match[:prefix]) && jn_lv_match
+                    text = jn_lv_match[:pre] + jn_lv_match[:post]
                   else
                     text.hyperlinks!
                   end
