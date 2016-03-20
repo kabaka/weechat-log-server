@@ -83,11 +83,9 @@
                   jn_lv_match     = text.match(/^(?<pre>.*?)(?<host>[(][~]?\w+[@][\w-:.]+[)][ ])(?<post>.*)$/)
 
                   if highlight_match
-                    text = "<span class='highlight'>#{highlight_match[:highlight]}</span>#{highlight_match[:remainder].hyperlinks}"
+                    text = "<span class='highlight'>#{highlight_match[:highlight]}</span>#{highlight_match[:remainder]}"
                   elsif ['-->', '<--'].include?(match[:prefix]) && jn_lv_match
                     text = jn_lv_match[:pre] + jn_lv_match[:post]
-                  else
-                    text.hyperlinks!
                   end
                 %>
                 <tr class='<%= style %>'>
