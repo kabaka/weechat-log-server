@@ -34,6 +34,10 @@ bin/weechat-log-server`. All args are optional, but setting `-p` or `-N` is reco
     * Move duplicate or complex tasks to Sinatra helpers.
     * Improve code organization.
 
+# Note
+
+Please ignore the `views`-branch. It shouldn't been pushed to the origin…
+
 # Thanks
 
 * [kabaka](https://github.com/kabaka) for this nice software
