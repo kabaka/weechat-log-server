@@ -1,6 +1,6 @@
 <% he = HTMLEntities.new %>
-<h1>Chat Log: <%= he.encode params[:buffer] %> on <%= he.encode params[:network] %></h1>
-<p><a class='button orange' href='/<%= URI.encode params[:network] %>'>Back</a></p>
+<h1><%= he.encode params[:buffer] %> on <%= he.encode params[:network] %></h1>
+<p><a class='orange' href='/<%= URI.encode params[:network] %>'>Back</a></p>
 <%
 
   path = File.expand_path $opts[:log_dir]
@@ -28,8 +28,8 @@
   <thead>
     <tr>
       <th></th>
-      <th>Date</th>
-      <th>Lines</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -53,9 +53,9 @@
           unless date == last_date
         %>
         <tr class='<%= 'even' if even = !even %>'>
-          <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode last_date %>'>View</a></td>
           <td><%= he.encode last_date %></td>
           <td><%= lines %></td>
+          <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode last_date %>'>View</a></td>
         </tr>
         <%
           lines = 0
@@ -65,9 +65,9 @@
       end
     %>
     <tr class='<%= 'even' if even = !even %>'>
-      <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'>View</a></td>
       <td><%= he.encode date %></td>
       <td><%= lines %></td>
+      <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'>View</a></td>
     </tr>
     <%
     %>

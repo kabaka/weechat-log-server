@@ -1,5 +1,5 @@
 <% he = HTMLEntities.new %>
-<h1>Chat Log: <%= he.encode params[:buffer] %> on <%= he.encode params[:network] %> (<%= he.encode params[:date]%>)</h1>
+<h1><%= he.encode params[:buffer] %> on <%= he.encode params[:network] %> (<%= he.encode params[:date]%>)</h1>
 <p><a class='button orange' href="/<%= URI.encode params[:network]%>/<%= URI.encode params[:buffer] %>">Back</a></p>
 <%
 
@@ -24,14 +24,14 @@
   if log
     even = true
     
-    share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}"
+    share_url = "https://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}"
   %>
   <table style="table-layout: fixed; width: 95%;">
     <thead>
       <tr>
-        <th style='width: 100px;'>Time</th>
-        <th style='width: 150px;'>Prefix</th>
-        <th>Text</th>
+        <th style='width: 100px;'></th>
+        <th style='width: 150px;'></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>

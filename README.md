@@ -5,7 +5,7 @@ Sinatra-powered WeeChat HTTP Log Viewer
 # Usage
 
 Until this is a gem (it will be soon), you must start the bot with `ruby -Ilib
-bin/weechat-log-server`. All args are optional, but setting -p is recommended.
+bin/weechat-log-server`. All args are optional, but setting `-p` or `-N` is recommended.
 
 ## Command Line Options
 
@@ -30,8 +30,11 @@ bin/weechat-log-server`. All args are optional, but setting -p is recommended.
   * Add necessary parts to make `weechat-log-server` a gem.
   * Complete README.md file.
   * Simplify style customization.
-  * Improve default style.
   * Refactor:
     * Move duplicate or complex tasks to Sinatra helpers.
     * Improve code organization.
 
+# Thanks
+
+* [kabaka](https://github.com/kabaka) for this nice software
+* BKA for the new layout
