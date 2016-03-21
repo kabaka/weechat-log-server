@@ -1,5 +1,5 @@
 <% he = HTMLEntities.new %>
-<h1>Chat Log: <%= he.encode params[:buffer] %> on <%= he.encode params[:network] %> (<%= he.encode params[:date]%>)</h1>
+<h1><%= he.encode params[:buffer] %> on <%= he.encode params[:network] %> (<%= he.encode params[:date]%>)</h1>
 <p><a class='button orange' href="/<%= URI.encode params[:network]%>/<%= URI.encode params[:buffer] %>">Back</a></p>
 <%
 
@@ -24,16 +24,14 @@
   if log
     even = true
     
-    key = set_key "/#{params[:network]}/#{params[:buffer]}/#{params[:date]}"
-    share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}?key=#{key}"
+    share_url = "https://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}"
   %>
-  <p>Share: <a href='<%= share_url %>'><%= share_url %></a></p>
   <table style="table-layout: fixed; width: 95%;">
     <thead>
       <tr>
-        <th style='width: 100px;'>Time</th>
-        <th style='width: 150px;'>Prefix</th>
-        <th>Text</th>
+        <th style='width: 100px;'></th>
+        <th style='width: 150px;'></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -81,12 +79,13 @@
 
                   text = he.encode match[:text]
 
-                  text_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
+                  highlight_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
+                  jn_lv_match     = text.match(/^(?<pre>.*?)(?<host>[(][~]?\w+[@][\w-:.]+[)][ ])(?<post>.*)$/)
 
-                  if text_match
-                    text = "<span class='highlight'>#{text_match[:highlight]}</span>#{text_match[:remainder].hyperlinks}"
-                  else
-                    text.hyperlinks!
+                  if highlight_match
+                    text = "<span class='highlight'>#{highlight_match[:highlight]}</span>#{highlight_match[:remainder]}"
+                  elsif ['-->', '<--'].include?(match[:prefix]) && jn_lv_match
+                    text = jn_lv_match[:pre] + jn_lv_match[:post]
                   end
                 %>
                 <tr class='<%= style %>'>

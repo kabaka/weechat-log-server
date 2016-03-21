@@ -2,15 +2,30 @@
 <html>
   <head>
     <title>WeeChat Log Server</title>
-    <style type="text/css">
+    <style>
       html {
         font-family: sans-serif;
       }
       body {
         width: 80%;
-        border: 1px solid #DEDEDE;
+        border: 0px solid #A8A8A8;
         margin: 10px auto;
         padding: 15px;
+        background-color: #f5f5f5;
+      }
+      #head p {
+        line-height: 30px;
+        font-size: 20px;
+        text-align: center;
+      }
+      h1 {
+        font-size: 18px;
+        text-align: center;
+        color: #800;
+      }
+      thead th {
+        border-bottom: solid #ccc 2px;
+        font-weight: bold;
       }
 
       #head {
@@ -25,7 +40,6 @@
         font-size: 18px;
         color: #777;
       }
-
       #foot {
         border-top: 1px dotted #DFDFDF;
         height: 26px;
@@ -35,7 +49,9 @@
         font-size: 14px;
         text-align: center;
       }
-
+      #foot a,p {
+        color: grey;
+      }
       a, a:visited {
         color: #44D;
         text-decoration: none;
@@ -43,13 +59,11 @@
       a:active, a:hover {
         text-decoration: underline;
       }
-
       h1 {
         font-size: 18px;
       }
-
       table {
-        width: 80%;
+        width: 60%;
         margin: 5px auto;
         border-collapse: collapse;
       }
@@ -57,9 +71,8 @@
         border-bottom: 1px solid #000;
         font-weight: bold;
       }
-
       tr.join {
-        color: #3C3;
+        color: #C33;
       }
       tr.leave {
         color: #C33;
@@ -82,52 +95,41 @@
       tr.error {
         color: #F00;
       }
-
       tr.even {
         background-color: #EFEFEF;
       }
       tr:hover {
         background-color: #CCC;
       }
-
       .button {
-        display: inline-block;
-        height: 25px;
-        width: 100px;
+        height: auto;
+        width: auto;
         color: #000 !important;
         line-height: 25px;
         font-size: 14px;
         text-align: center;
         text-decoration: none !important;
-        border: 2px solid #DDD;
-      }
-      .green {
-        background-color: #55DD55;
-        border-top: 2px solid #3F3;
-        border-left: 2px solid #3F3;
-        border-right: 2px solid #3A3;
-        border-bottom: 2px solid #3A3;
-      }
-      .green:active {
-        border-top: 2px solid #3A3;
-        border-left: 2px solid #3A3;
-        border-right: 2px solid #3F3;
-        border-bottom: 2px solid #3F3;
-      }
-      .orange {
-        background-color: #DDAA55;
-        border-top: 2px solid #FA3;
-        border-left: 2px solid #FA3;
-        border-right: 2px solid #A33;
-        border-bottom: 2px solid #A33;
-      }
-      .orange:active {
-        border-top: 2px solid #A33;
-        border-left: 2px solid #A33;
-        border-right: 2px solid #FA3;
-        border-bottom: 2px solid #FA3;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin: auto;
+        background-color: #B4B1AC;
       }
 
+      .orange {
+        height: auto;
+        width: 80px;
+        color: #000 !important;
+        line-height: 25px;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none !important;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin: auto;
+        background-color: #B4B1AC;
+      }
 
       .irc {
         font-family: monospace;
@@ -137,12 +139,15 @@
       }
       td.prefix {
         vertical-align: top;
-        text-align: right;
+        text-align: center;
         white-space: nowrap;
         padding-top: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .chat .prefix {
-        color: #226;
+        color: #800;
         font-weight: bold;
       }
       .prefix, .text {
@@ -158,11 +163,9 @@
       .date a:hover, .time a:hover {
         color: #BBB;
       }
-
       .highlight {
         font-weight: bold;
       }
-
       .center {
         text-align: center;
       }
@@ -171,7 +174,7 @@
   </head>
   <body>
     <div id='head'>
-      <p>WeeChat Logs - <span id='hostname'><%= Socket.gethostname %></span></p>
+       <p>WeeChat Logs</p>
     </div>
     <%= yield %>
     <div id='foot'>
