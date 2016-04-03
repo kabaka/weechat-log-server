@@ -25,6 +25,13 @@
     even = true
 
     share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}"
+    unless $opts[:no_auth]
+      key = set_key "/#{params[:network]}/#{params[:buffer]}/#{params[:date]}"
+      share_url += "?key=#{key}"
+      %>
+        <p id="sharebox"><b>Share:</b> <a href='<%= share_url %>'><%= share_url %></a></p>
+      <%
+    end
   %>
   <table style="table-layout: fixed; width: 95%;">
     <thead>
@@ -78,6 +85,7 @@
                   end
 
                   text = he.encode match[:text]
+                  text.hyperlinks!
 
                   jn_lv_match = text.match(/^(?<pre>.*?)(?<host>[(][~]?\w+[@][\w-:.]+[)][ ])(?<post>.*)$/)
                   if $opts[:cloak_host] && ['-->', '<--', '--'].include?(match[:prefix]) && jn_lv_match

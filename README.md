@@ -27,7 +27,7 @@ behind nginx is posted [here](https://gist.github.com/geistesk/113c3733349f56ab3
     -N, --no-auth                    Don't use HTTP authentication.
     -u, --user-name USER             User name to access logs. (default: admin)
     -p, --password PASSWORD          Password to access logs. (default: admin)
-    -C, --cloak-host                 Cloak hostname in logs. (Only works with the default view atm)
+    -C, --cloak-host                 Cloak hostname in logs. (Only works with the default view)
 
 # TODO
 
@@ -40,5 +40,4 @@ behind nginx is posted [here](https://gist.github.com/geistesk/113c3733349f56ab3
 
 # Thanks
 
-* [kabaka](https://github.com/kabaka) for this nice software
 * BKA for the new layout
