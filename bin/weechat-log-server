@@ -66,6 +66,11 @@ OptionParser.new do |opts|
     $opts[:password] = opt
   end
 
+  $opts[:cloak_host] = false
+  opts.on '-C', '--cloak-host', "Cloak hostname in logs." do |opt|
+    $opts[:cloak_host] = true
+  end
+
 end.parse!
 
 require 'weechat-log-server'

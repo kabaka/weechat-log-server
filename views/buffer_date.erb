@@ -23,8 +23,8 @@
 
   if log
     even = true
-    
-    share_url = "https://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}"
+
+    share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}"
   %>
   <table style="table-layout: fixed; width: 95%;">
     <thead>
@@ -79,12 +79,8 @@
 
                   text = he.encode match[:text]
 
-                  highlight_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
-                  jn_lv_match     = text.match(/^(?<pre>.*?)(?<host>[(][~]?\w+[@][\w-:.]+[)][ ])(?<post>.*)$/)
-
-                  if highlight_match
-                    text = "<span class='highlight'>#{highlight_match[:highlight]}</span>#{highlight_match[:remainder]}"
-                  elsif ['-->', '<--'].include?(match[:prefix]) && jn_lv_match
+                  jn_lv_match = text.match(/^(?<pre>.*?)(?<host>[(][~]?\w+[@][\w-:.]+[)][ ])(?<post>.*)$/)
+                  if $opts[:cloak_host] && ['-->', '<--', '--'].include?(match[:prefix]) && jn_lv_match
                     text = jn_lv_match[:pre] + jn_lv_match[:post]
                   end
                 %>

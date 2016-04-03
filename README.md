@@ -7,6 +7,9 @@ Sinatra-powered WeeChat HTTP Log Viewer
 Until this is a gem (it will be soon), you must start the bot with `ruby -Ilib
 bin/weechat-log-server`. All args are optional, but setting `-p` or `-N` is recommended.
 
+One example for running a public WeeChat Log Server for just one buffer
+behind nginx is posted [here](https://gist.github.com/geistesk/113c3733349f56ab381f843e59e4daf0).
+
 ## Command Line Options
 
     Usage: bin/weechat-log-server [options]
@@ -24,6 +27,7 @@ bin/weechat-log-server`. All args are optional, but setting `-p` or `-N` is reco
     -N, --no-auth                    Don't use HTTP authentication.
     -u, --user-name USER             User name to access logs. (default: admin)
     -p, --password PASSWORD          Password to access logs. (default: admin)
+    -C, --cloak-host                 Cloak hostname in logs. (Only works with the default view atm)
 
 # TODO
 
@@ -33,10 +37,6 @@ bin/weechat-log-server`. All args are optional, but setting `-p` or `-N` is reco
   * Refactor:
     * Move duplicate or complex tasks to Sinatra helpers.
     * Improve code organization.
-
-# Note
-
-Please ignore the `views`-branch. It shouldn't been pushed to the origin…
 
 # Thanks
 

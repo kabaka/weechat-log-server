@@ -27,8 +27,8 @@
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
+      <th>Date</th>
+      <th>Lines</th>
       <th></th>
     </tr>
   </thead>
@@ -53,7 +53,7 @@
           unless date == last_date
         %>
         <tr class='<%= 'even' if even = !even %>'>
-          <td><%= he.encode last_date %></td>
+          <td><a class="index" href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'><%= he.encode date %></a></td>
           <td><%= lines %></td>
           <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode last_date %>'>View</a></td>
         </tr>
@@ -65,7 +65,7 @@
       end
     %>
     <tr class='<%= 'even' if even = !even %>'>
-      <td><%= he.encode date %></td>
+      <td><a class="index" href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'><%= he.encode date %></a></td>
       <td><%= lines %></td>
       <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'>View</a></td>
     </tr>
