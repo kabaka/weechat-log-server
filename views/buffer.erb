@@ -53,7 +53,7 @@
           unless date == last_date
         %>
         <tr class='<%= 'even' if even = !even %>'>
-          <td><a class="index" href='/<%= network %>/<%=buffer %>/<%= URI.encode date %>'><%= he.encode date %></a></td>
+          <td><a class="index" href='/<%= network %>/<%=buffer %>/<%= URI.encode last_date %>'><%= he.encode last_date %></a></td>
           <td><%= lines %></td>
           <td><a class='green button' href='/<%= network %>/<%=buffer %>/<%= URI.encode last_date %>'>View</a></td>
         </tr>
