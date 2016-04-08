@@ -1,12 +1,12 @@
-<h1>Network Index: <%= HTMLEntities.new.encode params[:network] %></h1>
+<h1><%= HTMLEntities.new.encode params[:network] %></h1>
 <p><a class='button orange' href='/'>Back</a></p>
 <table>
   <thead>
     <tr>
-      <th></th>
       <th>Buffer</th>
       <th>Last Updated</th>
       <th>Size (KiB)</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -36,10 +36,10 @@
   buffers.each do |buffer, info|
   %>
   <tr class='<%= 'even' if even = !even%>'>
-    <td><a class='button green' href="/<%= network %>/<%= URI.encode buffer %>/">View</a></td>
-    <td><%= buffer %></a></td>
+    <td><a class="index" href="/<%= network %>/<%= URI.encode buffer %>/"><%= buffer %></a></td>
     <td><%= info[:last_updated] %></a></td>
     <td><%= "%.2f" % [info[:size]/1024.0] %></a></td>
+    <td class="view"><a class='button green' href="/<%= network %>/<%= URI.encode buffer %>/">View</a></td>
     </tr>
     <%
   end

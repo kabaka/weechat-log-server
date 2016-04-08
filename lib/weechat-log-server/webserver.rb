@@ -1,6 +1,7 @@
 class Webserver < Sinatra::Base
   configure do
     set :views, File.expand_path($opts[:templates_dir])
+    set :public_folder, 'static'
   end
 
   get '/' do

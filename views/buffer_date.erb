@@ -1,5 +1,6 @@
 <% he = HTMLEntities.new %>
-<h1>Chat Log: <%= he.encode params[:buffer] %> on <%= he.encode params[:network] %> (<%= he.encode params[:date]%>)</h1>
+<h1><%= he.encode params[:buffer] %> on <%= he.encode params[:network] %></h1>
+<h2><%= he.encode params[:date]%></h2>
 <p><a class='button orange' href="/<%= URI.encode params[:network]%>/<%= URI.encode params[:buffer] %>">Back</a></p>
 <%
 
@@ -23,20 +24,25 @@
 
   if log
     even = true
-    
-    key = set_key "/#{params[:network]}/#{params[:buffer]}/#{params[:date]}"
-    share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}?key=#{key}"
+
+    share_url = "#{@env['rack.url_scheme']}://#{@env['HTTP_HOST']}#{@env['REQUEST_PATH']}"
+    unless $opts[:no_auth]
+      key = set_key "/#{params[:network]}/#{params[:buffer]}/#{params[:date]}"
+      share_url += "?key=#{key}"
+      %>
+        <p id="sharebox"><b>Share:</b> <a href='<%= share_url %>'><%= share_url %></a></p>
+      <%
+    end
   %>
-  <p>Share: <a href='<%= share_url %>'><%= share_url %></a></p>
   <table style="table-layout: fixed; width: 95%;">
     <thead>
       <tr>
-        <th style='width: 100px;'>Time</th>
-        <th style='width: 150px;'>Prefix</th>
-        <th>Text</th>
+        <th style='width: 100px;'></th>
+        <th style='width: 150px;'></th>
+        <th id="toggle-head"><a id="text-toggle"></a></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="chatbody">
       <%
         started = false
 
@@ -80,18 +86,16 @@
                   end
 
                   text = he.encode match[:text]
+                  text.hyperlinks!
 
-                  text_match = text.match(/^(?<highlight>[^:\s]+[:]\s)(?<remainder>.*)$/)
-
-                  if text_match
-                    text = "<span class='highlight'>#{text_match[:highlight]}</span>#{text_match[:remainder].hyperlinks}"
-                  else
-                    text.hyperlinks!
+                  jn_lv_match = text.match(/^(?<pre>.*?)(?<host>[(][~]?\w+[@][\w-:.]+[)][ ])(?<post>.*)$/)
+                  if $opts[:cloak_host] && ['-->', '<--', '--'].include?(match[:prefix]) && jn_lv_match
+                    text = jn_lv_match[:pre] + jn_lv_match[:post]
                   end
                 %>
                 <tr class='<%= style %>'>
                   <td class='time center'><a name='<%= anchor %>' href='<%= share_url %>#<%= anchor %>'><%= match[:time] %></a></td>
-                  <td class='irc prefix'><%= match[:prefix] %></td>
+                  <td class='irc prefix'><%= he.encode match[:prefix] %></td>
                   <td class='irc text'><%= text %></td>
                 </tr>
                 <%
@@ -109,3 +113,4 @@
     end
 
   %>
+<script type="text/javascript" src="/js/chat_expand.js"></script>
